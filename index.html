@@ -63,6 +63,37 @@ BS 5 https://getbootstrap.com/docs/5.3/forms/form-control/
 
 </div>
 
+<!-- text style section 
+BS 5    https://getbootstrap.com/docs/5.3/forms/form-control/
+        https://getbootstrap.com/docs/5.3/layout/grid/
+        https://getbootstrap.com/docs/5.3/forms/form-control/#color color picker
+
+-->
+
+<div class="row mt-4" id="textStyleSection">
+    <div class="col-md-4 mb-3">
+        <label for="fontSelect" class="form-label">Font:</label>
+        <select class="form-select" id="fontSelect">
+            <!-- výběr fontů... -->
+            <option value="Arial">Arial</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Helvetica">Helvetica</option>
+        </select>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label for="fontSize" class="form-label">Velikost fontu:</label>
+        <input type="number" class="form-control" id="fontSize" placeholder="14"> 
+        <!-- <input> s atributem type="number" automaticky zahrnuje šipky pro inkrementaci nebo dekrementaci hodnoty -->
+    </div>
+    <div class="col-md-4 mb-3">
+        <label for="fontColor" class="form-label">Barva fontu:</label>
+        <input type="color" class="form-control form-control-color" id="fontColor">
+    </div>
+</div>
+
+
+
+
 <!-- uzavřené divy pro odsazení -->
         </div>
     </div>
