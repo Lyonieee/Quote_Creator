@@ -12,3 +12,14 @@
 .navbar-toggler {
     margin-right: 20px; /* Nastaví odsazení pravého okraje pro hamburger menu */
 }
+
+.live-preview {
+    margin-top: 20px;    
+    border: 2px solid #ddd; /* Nastaví okraj */
+    padding: 20px; /* Vnitřní okraje pro text */
+    background-color: #f8f9fa; /* Světlé pozadí */
+    min-height: 150px; /* Minimální výška */
+    display: flex; /* Použití Flexboxu */
+    justify-content: center; /* Centrování obsahu flex kontejneru */
+    align-items: center; /* Zarovnání položek ve flex kontejneru */
+}
