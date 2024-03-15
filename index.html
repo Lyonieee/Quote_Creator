@@ -81,17 +81,44 @@ BS 5    https://getbootstrap.com/docs/5.3/forms/form-control/
         </select>
     </div>
     <div class="col-md-4 mb-3">
-        <label for="fontSize" class="form-label">Velikost fontu:</label>
+        <label for="fontSize" class="form-label">Font size:</label>
         <input type="number" class="form-control" id="fontSize" placeholder="14"> 
         <!-- <input> s atributem type="number" automaticky zahrnuje šipky pro inkrementaci nebo dekrementaci hodnoty -->
     </div>
     <div class="col-md-4 mb-3">
-        <label for="fontColor" class="form-label">Barva fontu:</label>
+        <label for="fontColor" class="form-label">Font Color:</label>
         <input type="color" class="form-control form-control-color" id="fontColor">
     </div>
 </div>
 
+<!-- background section -->
 
+<div class="row mt-4" id="backgroundSection">
+    <div class="col-md-6 mb-3">
+        <label for="backgroundColor" class="form-label">Background Color:</label>
+        <input type="color" class="form-control form-control-color" id="backgroundColor">
+    </div>
+
+</div>
+
+
+<!-- sizing section -->
+<div class="row mt-4" id="imageSizeSection">
+    <div class="col-md-6 mb-3">
+        <label for="imageWidth" class="form-label">Image Width:</label>
+        <input type="number" class="form-control" id="imageWidth" placeholder="800"> <!-- Nastavení výchozí šířky -->
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="imageHeight" class="form-label">Image Height:</label>
+        <input type="number" class="form-control" id="imageHeight" placeholder="600"> <!-- Nastavení výchozí výšky -->
+    </div>
+</div>
+
+<!-- save button -->
+
+<div class="text-end mt-4 mb-4">
+    <button type="button" class="btn btn-primary" id="saveButton">Save Quote Image</button>
+</div>
 
 
 <!-- uzavřené divy pro odsazení -->
