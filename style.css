@@ -7,10 +7,17 @@
 
 .navbar-nav {
     margin-right: 20px; /* Odsazení pravého okraje pro menu */
+    
+
 }
 
 .navbar-toggler {
     margin-right: 20px; /* Nastaví odsazení pravého okraje pro hamburger menu */
+}
+
+.nav-item {
+    padding-right: 15px; /* nebo jakékoli jiné odsazení, které preferujete */
+    text-align: right;
 }
 
 .preview-container {
