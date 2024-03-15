@@ -13,7 +13,7 @@
     margin-right: 20px; /* Nastaví odsazení pravého okraje pro hamburger menu */
 }
 
-.live-preview {
+.preview-container {
     border: 2px solid #ddd; /* Nastaví okraj */
     padding: 20px; /* Vnitřní okraje pro text */
     background-color: #f8f9fa; /* Světlé pozadí */
@@ -21,4 +21,26 @@
     display: flex; /* Použití Flexboxu */
     justify-content: center; /* Centrování obsahu flex kontejneru */
     align-items: center; /* Zarovnání položek ve flex kontejneru */
+}
+
+/* Quote Previews Section styling */
+
+
+.library-preview {
+    max-height: 300px; /* Přizpůsobte výšku vašim potřebám */
+    width: max-width; 
+    overflow: hidden; /* Prořezává přebytečný obsah */
+}
+
+.small-preview {
+    max-height: 200px; /* Přizpůsobte vašim potřebám */
+    width: max-width; 
+    overflow: hidden; /* Ukrojí přebytečný obsah */
+    padding: 15px;
+}
+
+.small-previews-scrollable {
+    max-height: 400px; /* Nastavte maximální výšku podle potřeb */
+    overflow-y: auto; /* Zobrazí svislý posuvník, pokud je obsah delší než maximální výška */
+    overflow-x: hidden;
 }
