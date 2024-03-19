@@ -9,8 +9,9 @@ Colours design
 
 
 */
+
 .navbar-brand {
-    display: flex; /* Zapne flexbox pro tento prvek */
+    display: flex;
     align-items: center; /* Zarovná položky na střed ve vertikálním směru */
     justify-content: center; /* Zarovná položky na střed v horizontálním směru */
     height: 100%; /* Nastaví výšku rodičovského prvku na 100% výšky navigačního pruhu */
@@ -27,13 +28,13 @@ Colours design
 }
 
 .navbar {
-    background-color: #00386b; /* Tmavě modrá */
+    background-color: #00386b; 
     
 }
 
 .navbar-toggler {
     margin-right: 20px;
-    border-color: rgba(255, 255, 255, 0.1) !important; /* Mění barvu okraje ikony na světle bílou nebo ji můžete odstranit */
+    border-color: rgba(255, 255, 255, 0.1) !important; /* Mění barvu okraje ikony na světle bílou*/
 }
 
 .navbar-toggler:focus {
@@ -43,62 +44,65 @@ Colours design
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
-    /* Vytvoří bílou ikonu hamburger menu */
+
 }
-
-
-
-
 
 .nav-item {
     margin-right: 15px;
     text-align: right;
-
-
 }
 
 .nav-link {
-    transition: background-color 0.3s ease; /* Přidává plynulý přechod pro zesvětlení */
-   
+    transition: background-color 0.3s ease; 
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Zesvětluje pozadí položky menu při najetí */
-
+    background-color: rgba(255, 255, 255, 0.2); 
 }
 
 .navbar-brand, .nav-link {
-    color: white !important; /* Nastaví barvu textu všech odkazů v navigaci na bílou */
+    color: white !important; 
 }
 
 .preview-container {
-    border: 2px solid #ddd; /* Nastaví okraj */
-    padding: 20px; /* Vnitřní okraje pro text */
-    background-color: #f8f9fa; /* Světlé pozadí */
-    min-height: 150px; /* Minimální výška */
-    display: flex; /* Použití Flexboxu */
-    justify-content: center; /* Centrování obsahu flex kontejneru */
-    align-items: center; /* Zarovnání položek ve flex kontejneru */
+    border: 2px solid #ddd;
+    padding: 20px; 
+    background-color: #f8f9fa; 
+    min-height: 150px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
 
 /* Quote Previews Section styling */
 
 
 .library-preview {
-    max-height: 300px; /* Přizpůsobte výšku vašim potřebám */
+    max-height: 300px; 
     width: max-width; 
-    overflow: hidden; /* Prořezává přebytečný obsah */
+    overflow: hidden; 
 }
 
 .small-preview {
-    max-height: 200px; /* Přizpůsobte vašim potřebám */
+    max-height: 200px;
     width: max-width; 
-    overflow: hidden; /* Ukrojí přebytečný obsah */
+    overflow: hidden; 
     padding: 15px;
 }
 
 .small-previews-scrollable {
-    max-height: 400px; /* Nastavte maximální výšku podle potřeb */
-    overflow-y: auto; /* Zobrazí svislý posuvník, pokud je obsah delší než maximální výška */
+    max-height: 400px; 
+    overflow-y: auto; 
     overflow-x: hidden;
+}
+
+.btn-primary {
+    background-color: #00386b !important; 
+    border-color: #00386b !important; 
+    color: white !important; 
+    border-radius: 30px !important;
+}
+
+.btn-primary:hover {
+    background-color: #00376bec !important;
 }
