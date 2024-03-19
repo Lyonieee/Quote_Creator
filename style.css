@@ -1,23 +1,74 @@
-.logo {
-    height: 30px; 
-    width: auto;  /* Šířka se automaticky přizpůsobí zachování poměru stran */
-    margin-right: 15px; /* Pravý okraj pro oddělení loga od textu */
-    margin-left: 15px;
+/* 
+Colours design
+
+    --primary-color: #00386b;     Tmavě modrá 
+    --secondary-color: #ef6534;   Sytě oranžová 
+    --black-color: #414042;       Téměř černá 
+    --cta-color: #70b73a;         Zelená 
+    --gray-color: #c6c6c6;        Šedá 
+
+
+*/
+.navbar-brand {
+    display: flex; /* Zapne flexbox pro tento prvek */
+    align-items: center; /* Zarovná položky na střed ve vertikálním směru */
+    justify-content: center; /* Zarovná položky na střed v horizontálním směru */
+    height: 100%; /* Nastaví výšku rodičovského prvku na 100% výšky navigačního pruhu */
 }
 
-.navbar-nav {
-    margin-right: 20px; /* Odsazení pravého okraje pro menu */
-    
 
+.logo {
+    height: 40px; 
+    width: auto;  
+    margin-right: 15px; /* Pravý okraj pro oddělení loga od textu */
+    margin-left: 15px;
+    margin-bottom: 15px;
+  
+}
+
+.navbar {
+    background-color: #00386b; /* Tmavě modrá */
+    
 }
 
 .navbar-toggler {
-    margin-right: 20px; /* Nastaví odsazení pravého okraje pro hamburger menu */
+    margin-right: 20px;
+    border-color: rgba(255, 255, 255, 0.1) !important; /* Mění barvu okraje ikony na světle bílou nebo ji můžete odstranit */
 }
 
+.navbar-toggler:focus {
+    outline: 2px solid white !important; /* Nastaví bílý obrys */
+    box-shadow: none !important; /* Odstraní stín */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+    /* Vytvoří bílou ikonu hamburger menu */
+}
+
+
+
+
+
 .nav-item {
-    padding-right: 15px; /* nebo jakékoli jiné odsazení, které preferujete */
+    margin-right: 15px;
     text-align: right;
+
+
+}
+
+.nav-link {
+    transition: background-color 0.3s ease; /* Přidává plynulý přechod pro zesvětlení */
+   
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Zesvětluje pozadí položky menu při najetí */
+
+}
+
+.navbar-brand, .nav-link {
+    color: white !important; /* Nastaví barvu textu všech odkazů v navigaci na bílou */
 }
 
 .preview-container {
