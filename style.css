@@ -10,6 +10,10 @@ Colours design
 
 */
 
+body {
+    font-family: 'Poppins', sans-serif !important;
+}
+
 .navbar-brand {
     display: flex;
     align-items: center; /* Zarovná položky na střed ve vertikálním směru */
