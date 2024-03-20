@@ -71,7 +71,7 @@ Colours design
     border: 2px solid #ddd;
     padding: 20px; 
     background-color: #f8f9fa; 
-    min-height: 150px; 
+    min-height: 300px; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -109,3 +109,5 @@ Colours design
 .btn-primary:hover {
     background-color: #00376bec !important;
 }
+
+
