@@ -48,12 +48,15 @@ Colours design
 }
 
 .nav-item {
-    margin-right: 15px;
     text-align: right;
+
 }
 
 .nav-link {
     transition: background-color 0.3s ease; 
+    padding-right: 15px !important; /* Přidávejte padding k nav-link místo k nav-item pro zachování mezery */
+    width: 100% !important;
+    display: block !important;
 }
 
 .nav-link:hover {
