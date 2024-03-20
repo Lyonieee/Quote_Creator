@@ -16,24 +16,20 @@ body {
 
 .navbar-brand {
     display: flex;
-    align-items: center; /* Zarovná položky na střed ve vertikálním směru */
-    justify-content: center; /* Zarovná položky na střed v horizontálním směru */
-    height: 100%; /* Nastaví výšku rodičovského prvku na 100% výšky navigačního pruhu */
+    align-items: center; 
+    justify-content: center; 
+    height: 100%; 
 }
 
 
 .logo {
     height: 40px; 
-    width: auto;  
-    margin-right: 15px; /* Pravý okraj pro oddělení loga od textu */
+    margin-right: 15px; 
     margin-left: 15px;
-    margin-bottom: 15px;
-  
 }
 
 .navbar {
     background-color: #00386b; 
-    
 }
 
 .navbar-toggler {
@@ -58,9 +54,10 @@ body {
 
 .nav-link {
     transition: background-color 0.3s ease; 
-    padding-right: 15px !important; /* Přidávejte padding k nav-link místo k nav-item pro zachování mezery */
+    padding-right: 15px !important; 
     width: 100% !important;
     display: block !important;
+    text-transform: uppercase;
 }
 
 .nav-link:hover {
