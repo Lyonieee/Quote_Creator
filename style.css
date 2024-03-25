@@ -12,6 +12,7 @@ Colours design
 
 body {
     font-family: 'Poppins', sans-serif !important;
+
 }
 
 .navbar-brand {
@@ -68,9 +69,14 @@ body {
     color: white !important; 
 }
 
+
+
+/* Quote Previews Section styling */
+
+/* Live preview */
+
 .preview-container {
     border: 2px solid #ddd;
-    padding: 20px; 
     background-color: #f8f9fa; 
     min-height: 300px; 
     display: flex; 
@@ -78,26 +84,36 @@ body {
     align-items: center; 
 }
 
-/* Quote Previews Section styling */
-
-
 .library-preview {
     max-height: 300px; 
     width: max-width; 
     overflow: hidden; 
+    
 }
+
+/* Small previews */
 
 .small-preview {
     max-height: 200px;
     width: max-width; 
     overflow: hidden; 
-    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-elements {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .small-previews-scrollable {
     max-height: 400px; 
     overflow-y: auto; 
     overflow-x: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .btn-primary {
@@ -110,5 +126,3 @@ body {
 .btn-primary:hover {
     background-color: #00376bec !important;
 }
-
-
