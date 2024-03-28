@@ -12,30 +12,22 @@ Colours design
 
 body {
     font-family: 'Poppins', sans-serif !important;
-
 }
 
 .navbar {
-    min-height: 50px; 
+    min-height: 60px; 
+    background-color: #00386b;
 }
 
 .navbar-brand {
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
-    height: 100%; 
+margin-left: 15px
+
 }
-
-
 
 .logo {
     height: 40px; 
     margin-right: 15px; 
     margin-left: 15px;
-}
-
-.navbar {
-    background-color: #00386b; 
 }
 
 .navbar-toggler {
@@ -66,20 +58,16 @@ body {
     padding-right: 15px !important; 
     padding-left: 15px !important;
     text-transform: uppercase;
+    text-align: right;
   }
-
 
 .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.2); 
 }
 
-
 .navbar-brand, .nav-link {
     color: white !important; 
 }
-
-
-
 
 /* Quote Previews Section styling */
 
@@ -124,6 +112,17 @@ body {
     overflow-x: hidden;
     display: flex;
     justify-content: center;
+}
+
+/* styl pro skrytí scrollbaru takto */
+.small-previews-scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+/* Alternativní způsoby pro skrývání scrollbaru pro různé prohlížeče */
+.small-previews-scrollable {
+    -ms-overflow-style: none; /* pro IE a Edge */
+    scrollbar-width: none; /* pro Firefox */
 }
 
 .btn-primary {
