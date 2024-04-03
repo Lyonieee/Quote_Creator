@@ -29,3 +29,12 @@ function updatePreview() {
     // aktualizace textu v živém náhledu
     livePreview.innerText = quoteTextValue;
 }
+
+// canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = imageWidthValue; // šířka obrázku z vstupu
+    canvas.height = imageHeightValue; // výška obrázku z vstupu
+    const ctx = canvas.getContext('2d');
+
+// přidání canvasu do těla stránky
+document.body.appendChild(canvas);
