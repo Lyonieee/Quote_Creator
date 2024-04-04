@@ -28,35 +28,37 @@ function updatePreview() {
 
     // aktualizace textu v živém náhledu
     livePreview.innerText = quoteTextValue;
+}
 
-    }
+// ***********ukládání obrázku
 
-    document.getElementById('saveButton').addEventListener('click', function() {
-        const canvas = document.getElementById('quoteCanvas');
-        const ctx = canvas.getContext('2d');
-    
-        // Nastavení velikosti canvasu
-        canvas.width = document.getElementById('imageWidth').value; // Získá hodnotu od uživatele
-        canvas.height = document.getElementById('imageHeight').value; // Získá hodnotu od uživatele
-    
-        // Nastavení barvy pozadí
-        ctx.fillStyle = document.getElementById('backgroundColor').value;
+document.getElementById('saveButton').addEventListener('click', function() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const width = parseInt(document.getElementById('imageWidth').value, 10) || 600; 
+    const height = parseInt(document.getElementById('imageHeight').value, 10) || 400; 
+
+    canvas.width = width;
+    canvas.height = height;
+
+        // přenos nastavení z formuláře na výsledný jpg
+        ctx.fillStyle = document.getElementById('backgroundColor').value; 
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-        // Nastavení textu
-        ctx.fillStyle = document.getElementById('fontColor').value;
         ctx.font = `${document.getElementById('fontSize').value}px ${document.getElementById('fontSelect').value}`;
-        ctx.textAlign = 'center';
-    
-        // Výpočet pozice textu pro vycentrování
-        const text = document.getElementById('quote-text').value;
-        const textX = canvas.width / 2;
-        const textY = canvas.height / 2;
-        ctx.fillText(text, textX, textY);
-    
-        // Konverze canvasu na data URL a uložení do localStorage
-        const imageDataURL = canvas.toDataURL("image/png");
-        const imageKey = 'quoteImage_' + Date.now(); // Unikátní klíč pro každý obrázek
-        localStorage.setItem(imageKey, imageDataURL);
-    });
- 
+        ctx.fillStyle = document.getElementById('fontColor').value;
+
+    // centrování textu
+    const text = document.getElementById('quote-text').value;
+    const x = canvas.width / 2;
+    const y = canvas.height / 2;
+
+    ctx.textAlign = 'center';
+    ctx.fillText(text, x, y);
+
+    // vygenerování obrázku a stahování
+    const image = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream");
+    const link = document.createElement('a');
+    link.download = 'my-quote.jpg';
+    link.href = image;
+    link.click();
+});
