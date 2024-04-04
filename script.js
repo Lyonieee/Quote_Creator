@@ -30,35 +30,32 @@ function updatePreview() {
     livePreview.innerText = quoteTextValue;
 }
 
-// ***********ukládání obrázku
-
 document.getElementById('saveButton').addEventListener('click', function() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    const width = parseInt(document.getElementById('imageWidth').value, 10) || 600; 
-    const height = parseInt(document.getElementById('imageHeight').value, 10) || 400; 
+    const width = parseInt(document.getElementById('imageWidth').value, 10) || 800; 
+    const height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
 
     canvas.width = width;
     canvas.height = height;
 
-        // přenos nastavení z formuláře na výsledný jpg
-        ctx.fillStyle = document.getElementById('backgroundColor').value; 
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.font = `${document.getElementById('fontSize').value}px ${document.getElementById('fontSelect').value}`;
-        ctx.fillStyle = document.getElementById('fontColor').value;
+    ctx.fillStyle = document.getElementById('backgroundColor').value;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = `${document.getElementById('fontSize').value}px ${document.getElementById('fontSelect').value}`;
+    ctx.fillStyle = document.getElementById('fontColor').value;
 
-    // centrování textu
     const text = document.getElementById('quote-text').value;
+    const trimmedText = text.substring(0, 8); 
+    const fileName = trimmedText.replace(/\s+/g, '_') + '.jpg';
+
     const x = canvas.width / 2;
     const y = canvas.height / 2;
-
     ctx.textAlign = 'center';
     ctx.fillText(text, x, y);
 
-    // vygenerování obrázku a stahování
     const image = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream");
     const link = document.createElement('a');
-    link.download = 'my-quote.jpg';
+    link.download = fileName; 
     link.href = image;
     link.click();
 });
