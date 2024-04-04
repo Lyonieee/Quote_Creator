@@ -28,13 +28,35 @@ function updatePreview() {
 
     // aktualizace textu v živém náhledu
     livePreview.innerText = quoteTextValue;
-}
 
-// canvas
-    const canvas = document.createElement('canvas');
-    canvas.width = imageWidthValue; // šířka obrázku z vstupu
-    canvas.height = imageHeightValue; // výška obrázku z vstupu
-    const ctx = canvas.getContext('2d');
+    }
 
-// přidání canvasu do těla stránky
-document.body.appendChild(canvas);
+    document.getElementById('saveButton').addEventListener('click', function() {
+        const canvas = document.getElementById('quoteCanvas');
+        const ctx = canvas.getContext('2d');
+    
+        // Nastavení velikosti canvasu
+        canvas.width = document.getElementById('imageWidth').value; // Získá hodnotu od uživatele
+        canvas.height = document.getElementById('imageHeight').value; // Získá hodnotu od uživatele
+    
+        // Nastavení barvy pozadí
+        ctx.fillStyle = document.getElementById('backgroundColor').value;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+        // Nastavení textu
+        ctx.fillStyle = document.getElementById('fontColor').value;
+        ctx.font = `${document.getElementById('fontSize').value}px ${document.getElementById('fontSelect').value}`;
+        ctx.textAlign = 'center';
+    
+        // Výpočet pozice textu pro vycentrování
+        const text = document.getElementById('quote-text').value;
+        const textX = canvas.width / 2;
+        const textY = canvas.height / 2;
+        ctx.fillText(text, textX, textY);
+    
+        // Konverze canvasu na data URL a uložení do localStorage
+        const imageDataURL = canvas.toDataURL("image/png");
+        const imageKey = 'quoteImage_' + Date.now(); // Unikátní klíč pro každý obrázek
+        localStorage.setItem(imageKey, imageDataURL);
+    });
+ 

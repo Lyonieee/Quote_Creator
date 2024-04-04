@@ -27,10 +27,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/index.html">Create a Quote</a>
+                        <a class="nav-link" href="index.html">Create a Quote</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/library.html">Quote Library</a>
+                        <a class="nav-link" href="library.html">Quote Library</a>
                     </li>
                 </ul>
             </div>
@@ -47,6 +47,10 @@
 
 <div class="row justify-content-center mt-4" id="livePreviewSection">
     <div class="col-lg-12">
+
+        <!-- Canvas skrytý nebo mimo hlavní oblast viditelnosti, je zde až pro načítání obr. -->
+        <canvas id="quoteCanvas" style="display: none;"></canvas> 
+
             <div id="livePreview" class="preview-container">
             </div>
     </div>
