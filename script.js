@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     inputs.forEach(inputId => {
         document.getElementById(inputId).addEventListener('change', updatePreview);
     });
+
+    setupSaveButton();
+    
 });
 
 function updatePreview() {
@@ -28,34 +31,46 @@ function updatePreview() {
 
     // aktualizace textu v živém náhledu
     livePreview.innerText = quoteTextValue;
+
+}   
+
+function setupSaveButton() {
+        document.getElementById('saveButton').addEventListener('click', function() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const width = parseInt(document.getElementById('imageWidth').value, 10) || 800; 
+            const height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
+    
+            canvas.width = width;
+            canvas.height = height;
+    
+            ctx.fillStyle = document.getElementById('backgroundColor').value;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = `${document.getElementById('fontSize').value}px ${document.getElementById('fontSelect').value}`;
+            ctx.fillStyle = document.getElementById('fontColor').value;
+   
+            const text = document.getElementById('quote-text').value;
+            const x = canvas.width / 2;
+            const y = canvas.height / 2;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle'; // vertikální zarovnání textu
+            ctx.fillText(text, x, y); 
+    
+            // Ořezání textu na 8 znaků a generování názvu souboru
+            const trimmedText = text.substring(0, 8); 
+            const fileName = trimmedText.replace(/\s+/g, '_') + '.jpg';
+            
+            const image = canvas.toDataURL("image/jpeg"); 
+
+            // Přidání obrázku do LocalStorage
+            let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+            savedImages.push(image);
+            localStorage.setItem('savedImages', JSON.stringify(savedImages));
+    
+            // Stáhnutí obrázku
+            const link = document.createElement('a');
+            link.download = fileName; 
+            link.href = image;
+            link.click();
+        });
 }
-
-document.getElementById('saveButton').addEventListener('click', function() {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const width = parseInt(document.getElementById('imageWidth').value, 10) || 800; 
-    const height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
-
-    canvas.width = width;
-    canvas.height = height;
-
-    ctx.fillStyle = document.getElementById('backgroundColor').value;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = `${document.getElementById('fontSize').value}px ${document.getElementById('fontSelect').value}`;
-    ctx.fillStyle = document.getElementById('fontColor').value;
-
-    const text = document.getElementById('quote-text').value;
-    const trimmedText = text.substring(0, 8); 
-    const fileName = trimmedText.replace(/\s+/g, '_') + '.jpg';
-
-    const x = canvas.width / 2;
-    const y = canvas.height / 2;
-    ctx.textAlign = 'center';
-    ctx.fillText(text, x, y);
-
-    const image = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream");
-    const link = document.createElement('a');
-    link.download = fileName; 
-    link.href = image;
-    link.click();
-});
