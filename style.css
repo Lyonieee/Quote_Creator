@@ -1,18 +1,8 @@
-/* 
-Colours design
-
-    --primary-color: #00386b;     Tmavě modrá 
-    --secondary-color: #ef6534;   Sytě oranžová 
-    --black-color: #414042;       Téměř černá 
-    --cta-color: #70b73a;         Zelená 
-    --gray-color: #c6c6c6;        Šedá 
-
-
-*/
-
 body {
     font-family: 'Poppins', sans-serif !important;
 }
+
+/* Navbar section */
 
 .navbar {
     min-height: 60px; 
@@ -21,7 +11,6 @@ body {
 
 .navbar-brand {
 margin-left: 15px;
-
 }
 
 .logo {
@@ -32,12 +21,12 @@ margin-left: 15px;
 
 .navbar-toggler {
     margin-right: 20px;
-    border-color: rgba(255, 255, 255, 0.1) !important; /* Mění barvu okraje ikony na světle bílou*/
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 .navbar-toggler:focus {
-    outline: 2px solid white !important; /* Nastaví bílý obrys */
-    box-shadow: none !important; /* Odstraní stín */
+    outline: 2px solid white !important;
+    box-shadow: none !important;
 }
 
 .navbar-toggler-icon {
@@ -62,22 +51,19 @@ margin-left: 15px;
   }
 
 .nav-link:hover {
-    text-decoration: underline; /* Přidáme bílé podtržení */
+    text-decoration: underline;
     color: white; 
 }
 
 .nav-link.active {
-    font-weight: bold; /* Nastaví text odkazu tučně */
+    font-weight: bold;
 }
-
-
 
 .navbar-brand, .nav-link {
     color: white !important; 
 }
 
 /* Quote Previews Section styling */
-
 
 /* Live preview */
 
@@ -100,7 +86,6 @@ margin-left: 15px;
     max-height: 300px; 
     width: max-width; 
     overflow: hidden; 
-    
 }
 
 /* Small previews */
@@ -128,16 +113,17 @@ margin-left: 15px;
     justify-content: center;
 }
 
-/* styl pro skrytí scrollbaru */
+/* Hide scrollbar */
 .small-previews-scrollable::-webkit-scrollbar {
     display: none;
 }
 
-/* další skrývání scrollbaru pro různé prohlížeče */
 .small-previews-scrollable {
-    -ms-overflow-style: none; /* pro IE a Edge */
-    scrollbar-width: none; /* pro Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
+
+/* Button */
 
 .btn-primary {
     background-color: #00386b !important; 
