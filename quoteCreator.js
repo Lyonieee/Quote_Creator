@@ -30,6 +30,28 @@ function updatePreview() {
     livePreview.innerText = quoteTextValue;
 }   
 
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
+    var words = text.split(' ');
+    var line = '';
+
+    for(var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + ' ';
+        var metrics = context.measureText(testLine);
+        var testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+            context.fillText(line, x, y);
+            line = words[n] + ' ';
+            y += lineHeight;
+        } else {
+            line = testLine;
+        }
+    }
+    context.fillText(line, x, y);
+}
+
+
+
+
 function setupSaveButton() {
         document.getElementById('saveButton').addEventListener('click', function() {
             const canvas = document.createElement('canvas');
@@ -46,11 +68,16 @@ function setupSaveButton() {
             ctx.fillStyle = document.getElementById('fontColor').value;
    
             const text = document.getElementById('quote-text').value;
-            const x = canvas.width / 2;
-            const y = canvas.height / 2;
+
             ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle'; 
-            ctx.fillText(text, x, y); 
+            ctx.textBaseline = 'top'; 
+
+            var maxWidth = width - 40; 
+            var lineHeight = 30;
+            var x = width / 2; 
+            var y = height / 2; 
+
+            wrapText(ctx, text, x, y, maxWidth, lineHeight);
     
             const trimmedText = text.substring(0, 8); 
             const fileName = trimmedText.replace(/\s+/g, '_') + '.jpg';
