@@ -85,7 +85,8 @@ margin-left: 15px;
 .library-preview {
     max-height: 300px; 
     width: max-width; 
-    overflow: hidden; 
+    overflow: hidden;
+    min-height: 100px; 
 }
 
 /* Small previews */
