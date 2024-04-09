@@ -31,13 +31,13 @@ function updatePreview() {
 }   
 
 function wrapText(context, text, x, y, maxWidth, lineHeight) {
-    var words = text.split(' ');
-    var line = '';
+    let words = text.split(' ');
+    let line = '';
 
-    for(var n = 0; n < words.length; n++) {
-        var testLine = line + words[n] + ' ';
-        var metrics = context.measureText(testLine);
-        var testWidth = metrics.width;
+    for(let n = 0; n < words.length; n++) {
+        let testLine = line + words[n] + ' ';
+        let metrics = context.measureText(testLine);
+        let testWidth = metrics.width;
         if (testWidth > maxWidth && n > 0) {
             context.fillText(line, x, y);
             line = words[n] + ' ';
@@ -65,7 +65,7 @@ function setupSaveButton() {
         ctx.fillStyle = backgroundColor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const maxWidth = (width - 40) * 0.8;
+        const maxWidth = width - 80;
         const maxHeight = height; 
         const initialFontSize = parseInt(document.getElementById('fontSize').value, 10) || 30;
         const fontSize = calculateFontSize(ctx, text, maxWidth, maxHeight, initialFontSize);
@@ -75,9 +75,9 @@ function setupSaveButton() {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        var lineHeight = fontSize * 1.2;
-        var x = width / 2;
-        var y = (height / 2) - (lineHeight / 2); 
+        let lineHeight = fontSize * 1.2;
+        let x = width / 2;
+        let y = (height / 2) - (lineHeight / 2); 
 
         wrapText(ctx, text, x, y, maxWidth, lineHeight);
         
@@ -95,6 +95,7 @@ function setupSaveButton() {
         link.click();
     });
 }
+
 
 function calculateFontSize(context, text, maxWidth, maxHeight, initialFontSize) {
     let fontSize = initialFontSize;
