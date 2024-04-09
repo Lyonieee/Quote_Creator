@@ -49,48 +49,67 @@ function wrapText(context, text, x, y, maxWidth, lineHeight) {
     context.fillText(line, x, y);
 }
 
-
-
-
 function setupSaveButton() {
-        document.getElementById('saveButton').addEventListener('click', function() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const width = parseInt(document.getElementById('imageWidth').value, 10) || 800; 
-            const height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
-    
-            canvas.width = width;
-            canvas.height = height;
-    
-            ctx.fillStyle = document.getElementById('backgroundColor').value;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.font = `${document.getElementById('fontSize').value}px ${document.getElementById('fontSelect').value}`;
-            ctx.fillStyle = document.getElementById('fontColor').value;
-   
-            const text = document.getElementById('quote-text').value;
+    document.getElementById('saveButton').addEventListener('click', function() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const width = parseInt(document.getElementById('imageWidth').value, 10) || 800; 
+        const height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
+        const backgroundColor = document.getElementById('backgroundColor').value;
+        const fontColor = document.getElementById('fontColor').value;
+        const text = document.getElementById('quote-text').value;
 
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top'; 
+        canvas.width = width;
+        canvas.height = height;
+        ctx.fillStyle = backgroundColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            var maxWidth = width - 40; 
-            var lineHeight = 30;
-            var x = width / 2; 
-            var y = height / 2; 
+        const maxWidth = (width - 40) * 0.8;
+        const maxHeight = height; 
+        const initialFontSize = parseInt(document.getElementById('fontSize').value, 10) || 30;
+        const fontSize = calculateFontSize(ctx, text, maxWidth, maxHeight, initialFontSize);
+        
+        ctx.font = `${fontSize}px Arial`;
+        ctx.fillStyle = fontColor;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
 
-            wrapText(ctx, text, x, y, maxWidth, lineHeight);
-    
-            const trimmedText = text.substring(0, 8); 
-            const fileName = trimmedText.replace(/\s+/g, '_') + '.jpg';
-            
-            const image = canvas.toDataURL("image/jpeg"); 
+        var lineHeight = fontSize * 1.2;
+        var x = width / 2;
+        var y = (height / 2) - (lineHeight / 2); 
 
-            let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-            savedImages.push(image);
-            localStorage.setItem('savedImages', JSON.stringify(savedImages));
-    
-            const link = document.createElement('a');
-            link.download = fileName; 
-            link.href = image;
-            link.click();
-        });
+        wrapText(ctx, text, x, y, maxWidth, lineHeight);
+        
+        const trimmedText = text.substring(0, 8); 
+        const fileName = trimmedText.replace(/\s+/g, '_') + '.jpg';
+        const image = canvas.toDataURL("image/jpeg");
+        
+        let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+        savedImages.push(image);
+        localStorage.setItem('savedImages', JSON.stringify(savedImages));
+
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = image;
+        link.click();
+    });
+}
+
+function calculateFontSize(context, text, maxWidth, maxHeight, initialFontSize) {
+    let fontSize = initialFontSize;
+    context.font = `${fontSize}px Arial`;
+    let textWidth = context.measureText(text).width;
+    let lines = Math.ceil(textWidth / maxWidth);
+    let textHeight = lines * fontSize;
+
+    while ((textWidth > maxWidth || textHeight > maxHeight) && fontSize > 10) {
+        fontSize--;
+        context.font = `${fontSize}px Arial`;
+        textWidth = context.measureText(text).width;
+        lines = Math.ceil(textWidth / maxWidth);
+        textHeight = lines * fontSize;
+    }
+
+    return fontSize;
 }
