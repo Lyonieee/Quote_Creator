@@ -34,8 +34,13 @@ function updatePreview() {
     livePreview.style.fontSize = `${fontSizeValue}px`;
     livePreview.style.color = fontColorValue;
     livePreview.style.backgroundColor = backgroundColorValue;
-    livePreview.style.width = `${imageWidthValue}px`;
-    livePreview.style.height = `${imageHeightValue}px`;
+
+    livePreview.style.width = '100%';
+livePreview.style.maxWidth = `${imageWidthValue}px`;
+livePreview.style.height = 'auto';
+livePreview.style.aspectRatio = '2';
+
+
 
     livePreview.innerText = quoteTextValue;
 } 
@@ -57,9 +62,8 @@ function setupSaveButton() {
         const imageWidth = parseInt(document.getElementById('imageWidth').value, 10) || 800;
         const imageHeight = parseInt(document.getElementById('imageHeight').value, 10) || 600;
 
-        const scaleX = imageWidth / previewWidth;
-        const scaleY = imageHeight / previewHeight;
-        const scale = Math.min(scaleX, scaleY);
+
+        const scale = Math.sqrt((imageWidth * imageHeight) / (previewWidth * previewHeight)); 
 
         canvas.width = parseInt(document.getElementById('imageWidth').value, 10) || 800;
         canvas.height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
