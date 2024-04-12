@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupSaveButton();
 });
 
-
 function updatePreview() {
 
     const quoteTextValue = document.getElementById('quote-text').value;
@@ -52,6 +51,16 @@ function setupSaveButton() {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
+        const previewWidth = 800;
+        const previewHeight = 400;
+
+        const imageWidth = parseInt(document.getElementById('imageWidth').value, 10) || 800;
+        const imageHeight = parseInt(document.getElementById('imageHeight').value, 10) || 600;
+
+        const scaleX = imageWidth / previewWidth;
+        const scaleY = imageHeight / previewHeight;
+        const scale = Math.min(scaleX, scaleY);
+
         canvas.width = parseInt(document.getElementById('imageWidth').value, 10) || 800;
         canvas.height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
 
@@ -70,18 +79,22 @@ function setupSaveButton() {
         let fontSize = parseInt(document.getElementById('fontSize').value, 10) || 30;
 
         fontSize = calculateFontSize(ctx, text, maxWidth, maxHeight, fontSize);
-        ctx.font = `${fontSize}px ${fontSelectValue}`;
+        const scaledFontSize = fontSize * scale;
+        ctx.font = `${scaledFontSize}px ${fontSelectValue}`;
+
         ctx.fillStyle = document.getElementById('fontColor').value || 'black';
         ctx.textAlign = 'center';
 
         const lines = wrapTextAndGetLines(ctx, text, maxWidth, fontSize);    
 
-        const lineHeight = fontSize * 1.2;
+        const lineHeight = scaledFontSize * 1.2;
+
         const totalTextHeight = lines.length * lineHeight;
         let startY = Math.max((canvas.height - totalTextHeight) / 2, 20); 
 
         lines.forEach((line, index) => {
-            ctx.fillText(line, canvas.width / 2, startY + (index * fontSize * 1.2));
+            ctx.fillText(line, canvas.width / 2, startY + (index * lineHeight));
+            
         });
 
         const trimmedText = text.substring(0, 8); 
@@ -99,7 +112,6 @@ function setupSaveButton() {
     });
 }
 
-
 function downloadImage(data, filename) {
     const a = document.createElement('a');
     a.href = data;
@@ -113,8 +125,8 @@ function wrapTextAndGetLines(ctx, text, maxWidth, fontSize) {
 
     const fontSelectValue = document.getElementById('fontSelect').value;
 
-
     ctx.font = `${fontSize}px ${fontSelectValue}`;
+
     let words = text.split(' ');
     let lines = [];
     let currentLine = words[0];
