@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const inputs = ['quote-text', 'fontSelect', 'fontSize', 'fontColor', 'backgroundColor', 'imageWidth', 'imageHeight'];
-    inputs.forEach(inputId => {
-        document.getElementById(inputId).addEventListener('change', updatePreview);
+
+    const instantUpdateInputs = ['quote-text', 'fontSize', 'fontSelect', 'fontColor', 'backgroundColor'];
+    instantUpdateInputs.forEach(inputId => {
+        const element = document.getElementById(inputId);
+        if (element.tagName === 'SELECT') {
+            element.addEventListener('change', updatePreview);
+        } else {
+            element.addEventListener('input', updatePreview);
+        }
+    });
+
+    const dimensionInputs = ['imageWidth', 'imageHeight'];
+    dimensionInputs.forEach(inputId => {
+        document.getElementById(inputId).addEventListener('input', updatePreview);
     });
 
     setupSaveButton();
