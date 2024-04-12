@@ -59,12 +59,18 @@ function setupSaveButton() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         const text = document.getElementById('quote-text').value || '';
+
+
         const maxWidth = canvas.width - 80; 
-        const maxHeight = canvas.height - 20; 
+        const maxHeight = canvas.height - 20;
+        const fontSelectValue = document.getElementById('fontSelect').value;
+
+
+        
         let fontSize = parseInt(document.getElementById('fontSize').value, 10) || 30;
 
         fontSize = calculateFontSize(ctx, text, maxWidth, maxHeight, fontSize);
-        ctx.font = `${fontSize}px Arial`;
+        ctx.font = `${fontSize}px ${fontSelectValue}`;
         ctx.fillStyle = document.getElementById('fontColor').value || 'black';
         ctx.textAlign = 'center';
 
@@ -104,7 +110,11 @@ function downloadImage(data, filename) {
 }
 
 function wrapTextAndGetLines(ctx, text, maxWidth, fontSize) {
-    ctx.font = `${fontSize}px Arial`;
+
+    const fontSelectValue = document.getElementById('fontSelect').value;
+
+
+    ctx.font = `${fontSize}px ${fontSelectValue}`;
     let words = text.split(' ');
     let lines = [];
     let currentLine = words[0];
@@ -141,3 +151,4 @@ function calculateFontSize(ctx, text, maxWidth, maxHeight, initialFontSize) {
 
     return fontSize;
 }
+
