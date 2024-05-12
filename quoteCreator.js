@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     setupSaveButton();
+    
 });
 
 function updatePreview() {
@@ -36,15 +37,11 @@ function updatePreview() {
     livePreview.style.backgroundColor = backgroundColorValue;
 
     livePreview.style.width = '100%';
-livePreview.style.maxWidth = `${imageWidthValue}px`;
-livePreview.style.height = 'auto';
-livePreview.style.aspectRatio = '2';
-
-
-
+    livePreview.style.maxWidth = `${imageWidthValue}px`;
+    livePreview.style.height = 'auto';
+    livePreview.style.aspectRatio = '2'; 
     livePreview.innerText = quoteTextValue;
 } 
-
 function setupSaveButton() {
     const saveButton = document.getElementById('saveButton');
     if (!saveButton) {
@@ -56,55 +53,41 @@ function setupSaveButton() {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        const previewWidth = 800;
-        const previewHeight = 400;
-
         const imageWidth = parseInt(document.getElementById('imageWidth').value, 10) || 800;
         const imageHeight = parseInt(document.getElementById('imageHeight').value, 10) || 600;
 
-
-        const scale = Math.sqrt((imageWidth * imageHeight) / (previewWidth * previewHeight)); 
-
-        canvas.width = parseInt(document.getElementById('imageWidth').value, 10) || 800;
-        canvas.height = parseInt(document.getElementById('imageHeight').value, 10) || 600;
+        canvas.width = imageWidth;
+        canvas.height = imageHeight;
 
         ctx.fillStyle = document.getElementById('backgroundColor').value || 'white';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         const text = document.getElementById('quote-text').value || '';
+        const maxWidth = canvas.width - 80; // Odečtení okrajů pro text
+        const maxHeight = canvas.height - 20; // Odečtení okrajů pro text
 
-
-        const maxWidth = canvas.width - 80; 
-        const maxHeight = canvas.height - 20;
-        const fontSelectValue = document.getElementById('fontSelect').value;
-
-
-        
         let fontSize = parseInt(document.getElementById('fontSize').value, 10) || 30;
-
         fontSize = calculateFontSize(ctx, text, maxWidth, maxHeight, fontSize);
-        const scaledFontSize = fontSize * scale;
-        ctx.font = `${scaledFontSize}px ${fontSelectValue}`;
 
+        ctx.font = `${fontSize}px ${document.getElementById('fontSelect').value}`;
         ctx.fillStyle = document.getElementById('fontColor').value || 'black';
         ctx.textAlign = 'center';
 
-        const lines = wrapTextAndGetLines(ctx, text, maxWidth, fontSize);    
-
-        const lineHeight = scaledFontSize * 1.2;
-
+        const lines = wrapTextAndGetLines(ctx, text, maxWidth, fontSize);
+        const lineHeight = fontSize * 1.2;
         const totalTextHeight = lines.length * lineHeight;
-        let startY = Math.max((canvas.height - totalTextHeight) / 2, 20); 
+
+        // Upravení počáteční pozice startY, aby bylo zohledněno vertikální zarovnání a případné vzestupy/séstupy písma
+        let startY = Math.max((canvas.height - totalTextHeight) / 2, fontSize * 1.2); // Zajistíme, že začínáme alespoň s jedním řádkem výšky fontu shora
 
         lines.forEach((line, index) => {
             ctx.fillText(line, canvas.width / 2, startY + (index * lineHeight));
-            
         });
 
-        const trimmedText = text.substring(0, 8); 
+        const trimmedText = text.substring(0, 8);
         const fileName = trimmedText.replace(/\s+/g, '_') + '.jpg';
         const image = canvas.toDataURL("image/jpeg");
-        
+
         let savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
         savedImages.push(image);
         localStorage.setItem('savedImages', JSON.stringify(savedImages));
@@ -115,6 +98,22 @@ function setupSaveButton() {
         link.click();
     });
 }
+
+function calculateFontSize(ctx, text, maxWidth, maxHeight, initialFontSize) {
+    let fontSize = initialFontSize;
+    let lines = wrapTextAndGetLines(ctx, text, maxWidth, fontSize);
+    let textHeight = getTextHeight(lines, fontSize * 1.2);
+
+    // Dynamické škálování fontu, aby se vejde do zadných rozměrů
+    while ((textHeight > maxHeight || lines.some(line => ctx.measureText(line).width > maxWidth)) && fontSize > 10) {
+        fontSize--; // Postupné snižování velikosti fontu, aby text správně pasoval
+        lines = wrapTextAndGetLines(ctx, text, maxWidth, fontSize);
+        textHeight = getTextHeight(lines, fontSize * 1.2);
+    }
+
+    return fontSize;
+}
+
 
 function downloadImage(data, filename) {
     const a = document.createElement('a');
@@ -167,4 +166,3 @@ function calculateFontSize(ctx, text, maxWidth, maxHeight, initialFontSize) {
 
     return fontSize;
 }
-
